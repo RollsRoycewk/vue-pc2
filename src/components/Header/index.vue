@@ -7,7 +7,7 @@
           <p>尚品汇欢迎您！</p>
           <p>
             <span>请</span>
-            <router-link to="/">登录</router-link>
+            <router-link to="/login">登录</router-link>
             <router-link to="/register" class="register">免费注册</router-link>
           </p>
         </div>
@@ -36,6 +36,7 @@
             type="text"
             id="autocomplete"
             class="input-error input-xxlarge"
+            v-model="searchText"
           />
           <button class="sui-btn btn-xlarge btn-danger">搜索</button>
         </form>
@@ -47,10 +48,74 @@
 <script>
 export default {
   name: "Header",
+  data() {
+    return {
+      searchText: "",
+    };
+  },
+
   methods: {
+    /* 方式一 */
+    // handleSubmit() {
+    //   const { searchText } = this;
+    //   const params = searchText ? `/${searchText}` : "";
+    //   const location = "/search" + params;
+    //   this.$router.push(location);
+    // },
+
+    /* 方式二,params,需要解决 */
+    // handleSubmit() {
+    //   const { searchText } = this;
+    //   let searchT = searchText ? searchText : "";
+    //   console.log(searchT); // 123 可以打印出来 值
+    //   this.$router.push({
+    //     name: "search",
+    //     // path: "/search",
+    //     params: {
+    //       searchT,
+    //     },
+    //     query: {
+    //       name: "rolls",
+    //     },
+    //   });
+    // },
+    /* params参数 */
     handleSubmit() {
-      this.$router.push("/search");
+      const { searchText } = this;
+      const location = {
+        name: "search",
+        query: {
+          name: "rolls",
+        },
+      };
+      if (searchText) {
+        location.params = { searchText };
+      }
+      this.$router.push(
+        location
+        // (val) => {
+        //   console.log("成功啦", val);
+        // }
+        // (err) => {
+        //   console.log("失败啦", err);
+        // }
+      );
+      // .then((val) => {
+      //   console.log("then方法", val);
+      // })
+      // .catch((err) => {
+      //   console.log(err);
+      // });
     },
+    /* query参数 */
+    // handleSubmit() {
+    //   this.$router.push({
+    //     path: "/search",
+    //     query: {
+    //       name: "rolls",
+    //     },
+    //   });
+    // },
   },
 };
 </script>

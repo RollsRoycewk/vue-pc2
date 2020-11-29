@@ -1,14 +1,15 @@
 <template>
   <div>
     <Header />
-    <Home />
-    <Footer />
+    <!-- 加载显示当前路由组件 -->
+    <router-view></router-view>
+    <!-- 当不是登录或者注册时就显示 -->
+    <Footer v-if="!$route.meta.isFooterHide" />
   </div>
 </template>
 
 <script>
 import Header from "@components/Header";
-import Home from "@views/Home";
 import Footer from "@components/Footer";
 
 export default {
@@ -16,7 +17,6 @@ export default {
   components: {
     Header,
     Footer,
-    Home,
   },
 };
 </script>

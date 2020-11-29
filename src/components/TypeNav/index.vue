@@ -15,21 +15,32 @@
       </nav>
       <div class="sort">
         <div class="all-sort-list2">
-          <div class="item bo">
+          <div
+            class="item bo"
+            v-for="oneList in navData"
+            :key="oneList.categoryId"
+          >
             <h3>
-              <a href="">图书、音像、数字商品</a>
+              <a href="">{{ oneList.categoryName }}</a>
             </h3>
             <div class="item-list clearfix">
               <div class="subitem">
-                <dl class="fore">
+                <dl
+                  class="fore"
+                  v-for="twoList in oneList.categoryChild"
+                  :key="twoList.categoryId"
+                >
                   <dt>
-                    <a href="">电子书</a>
+                    <a href="">{{ twoList.categoryName }}</a>
                   </dt>
                   <dd>
-                    <em>
-                      <a href="">婚恋/两性</a>
+                    <em
+                      v-for="threeList in twoList.categoryChild"
+                      :key="threeList.categoryId"
+                    >
+                      <a href="">{{ threeList.categoryName }}</a>
                     </em>
-                    <em>
+                    <!-- <em>
                       <a href="">文学</a>
                     </em>
                     <em>
@@ -37,13 +48,13 @@
                     </em>
                     <em>
                       <a href="">畅读VIP</a>
-                    </em>
+                    </em> -->
                   </dd>
                 </dl>
               </div>
             </div>
           </div>
-          <div class="item">
+          <!-- <div class="item">
             <h3>
               <a href="">家用电器</a>
             </h3>
@@ -401,7 +412,7 @@
                 </dl>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -409,9 +420,20 @@
 </template>
 
 <script>
+import { getBaseCategoryList } from "@api/home";
+
 export default {
-  name: 'TypeNav',
-}
+  name: "TypeNav",
+  data() {
+    return {
+      navData: [],
+    };
+  },
+  async mounted() {
+    const res = await getBaseCategoryList();
+    this.navData = res.slice(0, -1);
+  },
+};
 </script>
 
 <style  lang="less" scoped>
