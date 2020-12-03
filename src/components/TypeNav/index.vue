@@ -40,15 +40,6 @@
                     >
                       <a href="">{{ threeList.categoryName }}</a>
                     </em>
-                    <!-- <em>
-                      <a href="">文学</a>
-                    </em>
-                    <em>
-                      <a href="">经管</a>
-                    </em>
-                    <em>
-                      <a href="">畅读VIP</a>
-                    </em> -->
                   </dd>
                 </dl>
               </div>

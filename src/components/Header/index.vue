@@ -64,49 +64,38 @@ export default {
     // },
 
     /* 方式二,params,需要解决 */
+    handleSubmit() {
+      const { searchText } = this;
+      let searchT = searchText ? searchText : "";
+
+      console.log(searchT); // 123 可以打印出来 值
+      this.$router.push({
+        name: "search",
+        // path: "/search",
+        params: {
+          searchT,
+        },
+        // query: {
+        //   name: "rolls",
+        // },
+      });
+    },
+    /* params参数 */
     // handleSubmit() {
     //   const { searchText } = this;
-    //   let searchT = searchText ? searchText : "";
-    //   console.log(searchT); // 123 可以打印出来 值
-    //   this.$router.push({
+    //   const location = {
     //     name: "search",
-    //     // path: "/search",
-    //     params: {
-    //       searchT,
-    //     },
     //     query: {
     //       name: "rolls",
     //     },
-    //   });
+    //   };
+    //   if (searchText) {
+    //     location.params = { searchText };
+    //   }
+    //   this.$router.push(
+    //     location
+    //   );
     // },
-    /* params参数 */
-    handleSubmit() {
-      const { searchText } = this;
-      const location = {
-        name: "search",
-        query: {
-          name: "rolls",
-        },
-      };
-      if (searchText) {
-        location.params = { searchText };
-      }
-      this.$router.push(
-        location
-        // (val) => {
-        //   console.log("成功啦", val);
-        // }
-        // (err) => {
-        //   console.log("失败啦", err);
-        // }
-      );
-      // .then((val) => {
-      //   console.log("then方法", val);
-      // })
-      // .catch((err) => {
-      //   console.log(err);
-      // });
-    },
     /* query参数 */
     // handleSubmit() {
     //   this.$router.push({
